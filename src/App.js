@@ -1,23 +1,36 @@
-import logo from './logo.svg';
+
 import './App.css';
+import {useState} from 'react';
+import List from './List'
+
 
 function App() {
+
+  const [profiles,setProfile]=useState([])
+  const [name,setName]=useState([])
+  const [title,setTitle]=useState([])
+
+  function saveProfile(event){
+    event.preventDefault()
+    setProfile([...profiles,{name,title}])
+  }
+
+ 
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form onSubmit={saveProfile}>
+        <label>Name
+          <input type="text" onChange={event=>setName(event.target.value)}></input>
+        </label>
+        <label>AND Title
+         <input type="text"onChange={event=>setTitle(event.target.value)}></input>
+        </label>
+        <button type="submit">Save</button>
+      </form>
+      <List profiles={profiles}></List>
     </div>
   );
 }
